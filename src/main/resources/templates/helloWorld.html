@@ -1,0 +1,24 @@
+<body>
+    <h1>ToDoList</h1>
+
+    <form action="#" th:action="@{/submit}" method="post">
+        <label for="name">ToDO:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="date">Date:</label><br>
+        <input type="date" id="date" name="date"><br>
+        <input type="submit" value="submit">
+    </form>
+
+    <h2>Names and Dates:</h2>
+    <ul th:if="${names.size() > 0}">
+        <li th:each="i : ${#numbers.sequence(0, names.size()-1)}">
+            <span th:text="${'Todo: ' + names[i] + ', Date: ' + dates[i]}"></span>
+
+            <form th:action="@{'/delete/' + ${i}}" method="post">
+                <button type="submit" value="Delete">Delete</button>
+            </form>
+        </li>
+    </ul>
+</body>
+
+</html>
