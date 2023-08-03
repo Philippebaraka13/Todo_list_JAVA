@@ -17,6 +17,13 @@
             <form th:action="@{'/delete/' + ${i}}" method="post">
                 <button type="submit" value="Delete">Delete</button>
             </form>
+            <form th:action="@{'/update/' + ${i}}" method="post">
+                <label for="newName">New ToDo:</label><br>
+                <input type="text" id="newName" name="newName" value="" required><br>
+                <label for="newDate">New Date:</label><br>
+                <input type="date" id="newDate" name="newDate" value="" required><br>
+                <input type="submit" value="Update">
+            </form>
         </li>
     </ul>
 </body>

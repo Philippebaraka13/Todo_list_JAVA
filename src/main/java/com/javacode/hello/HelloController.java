@@ -9,20 +9,19 @@ import org.springframework.ui.Model;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Controller
 public class HelloController {
 
     private List<String> names = new ArrayList<>();
     private List<String> dates = new ArrayList<>();
-    
+
     @GetMapping("/")
     public String hello(Model model) {
         model.addAttribute("names", names);
         model.addAttribute("dates", dates);
         return "helloWorld";
     }
-    
+
     @PostMapping("/submit")
     public String handleSubmit(@RequestParam String name, @RequestParam String date, Model model) {
         names.add(name);
@@ -31,12 +30,22 @@ public class HelloController {
     }
 
     @PostMapping("/delete/{index}")
-    public String handleDelete(@PathVariable int index, Model model ) {
-        if (index >= 0 && index < names.size() && index < dates.size() ) {
+    public String handleDelete(@PathVariable int index, Model model) {
+        if (index >= 0) {
             names.remove(index);
             dates.remove(index);
         }
         return "redirect:/";
     }
-}
 
+    @PostMapping("/update/{index}")
+    public String handleUpdate(@PathVariable int index, @RequestParam String newName, @RequestParam String newDate,
+            Model model) {
+        if (index >= 0) {
+            names.set(index, newName);
+            dates.set(index, newDate);
+
+        }
+        return "redirect:/";
+    }
+}
